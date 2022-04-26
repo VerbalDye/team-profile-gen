@@ -1,0 +1,60 @@
+:root{
+    --primary-color: rgb(19, 115, 241);
+    --secondary-color: rgb(236, 236, 236);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+header {
+    text-align: center;
+    background-color: var(--primary-color);
+    font-size: 24px;
+    padding: 40px;
+    color: white;
+}
+
+section {
+    display: flex;
+    justify-content: space-around;
+}
+
+section article {
+    background-color: var(--secondary-color);
+    margin: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+section article h2 {
+    background-color: var(--primary-color);
+    padding: 30px 20px;
+    color: white;
+    border-radius: 5px 5px 0 0;
+    line-height: 130%;
+}
+
+section article .employee-content {
+    margin: 20px;
+}
+
+section article .employee-content p {
+    padding: 15px;
+    background-color: white;
+    border: lightgrey 1px solid;
+    font-size: 16px;
+}
+
+section article .employee-content p:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+section article .employee-content p:last-child {
+    border-radius:  0 0 10px 10px;
+}
