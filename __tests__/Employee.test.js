@@ -9,9 +9,9 @@ test('create an employee class', () => {
 });
 
 test('test employee methods', () => {
-    const employee = new Employee('Martin', 2, 'ope@geedang.com');
+    const employee = new Employee('Cheryl', 2, 'ope@geedang.com');
 
-    expect(employee.getName()).toBe('Martin');
+    expect(employee.getName()).toBe('Cheryl');
     expect(employee.getId()).toEqual(expect.any(Number));
     expect(employee.getEmail()).toBe('ope@geedang.com');
     expect(employee.getRole()).toBe('Employee');
