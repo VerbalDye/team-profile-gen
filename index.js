@@ -5,12 +5,8 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Employee = require('./lib/Employee');
 
-addNewEmployee = function (employees) {
-    if (!employees) {
-        employees = [];
-    };
-
-    inquirer.prompt([
+const addNewEmployee = employees => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
@@ -32,7 +28,8 @@ addNewEmployee = function (employees) {
             choices: ['Manager', 'Engineer', 'Intern', 'Other'],
             message: 'Please select what employee type to add'
         }
-    ]).then(employeeInfo => {
+    ])
+    .then(employeeInfo => {
         switch (employeeInfo.employeeType) {
             case 'Manager':
                 return addManager(employeeInfo);
@@ -43,9 +40,10 @@ addNewEmployee = function (employees) {
             case 'Other':
                 return addEmployee(employeeInfo);
         }
-    }).then(employeeObject => {
+    })
+    .then(employeeObject => {
         employees.push(employeeObject);
-        inquirer.prompt(
+        return inquirer.prompt(
             {
                 type: 'confirm',
                 name: 'confirm',
@@ -53,7 +51,7 @@ addNewEmployee = function (employees) {
             }
         ).then(response => {
             if (response.confirm) {
-                addNewEmployee(employees);
+                return addNewEmployee(employees);
             } else {
                 return employees;
             }
@@ -61,8 +59,8 @@ addNewEmployee = function (employees) {
     })
 };
 
-addManager = function (employee) {
-    inquirer.prompt(
+const addManager = function (employee) {
+    return inquirer.prompt(
         {
             type: 'number',
             name: 'officeNumber',
@@ -73,8 +71,8 @@ addManager = function (employee) {
     })
 }
 
-addEngineer = function (employee) {
-    inquirer.prompt(
+const addEngineer = function (employee) {
+    return inquirer.prompt(
         {
             type: 'input',
             name: 'github',
@@ -85,8 +83,8 @@ addEngineer = function (employee) {
     })
 }
 
-addIntern = function (employee) {
-    inquirer.prompt(
+const addIntern = function (employee) {
+    return inquirer.prompt(
         {
             type: 'input',
             name: 'school',
@@ -97,7 +95,7 @@ addIntern = function (employee) {
     })
 }
 
-addEmployee = function (employee) {
+const addEmployee = function (employee) {
     return new Employee(employee.name, employee.id, employee.email);
 }
 
@@ -109,11 +107,13 @@ const generateHtml = function(employees) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duct</title>
+    <title>Team Site</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
+    <p>
+        ${JSON.stringify(employees)}
+    </p>
 </body>
 </html>
 `;
@@ -129,13 +129,19 @@ const writeFile = function(path, data) {
     });
 }
 
-addNewEmployee()
+
+// const init = new Promise((resolve, reject) => {
+//     resolve(addNewEmployee());
+// })
+
+addNewEmployee([])
     .then(employees => {
+        console.log(employees)
         return generateHtml(employees);
     }).then(siteHtml => {
-        return writeFile(siteHtml);
-    }).then(response => {
-        console.log(response);
+        return writeFile('./dist/index.html', siteHtml);
+    }).then(() => {
+        console.log('Save successful. Check "dist" folder for output.');
     }).catch(err => {
         console.log(err);
     })
