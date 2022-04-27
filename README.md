@@ -31,7 +31,7 @@
 `npm run test`
 
 ## Video Walkthrough
-[Click to Open Video]()
+[Click to Open Video](https://drive.google.com/file/d/18w7T2ygOqYEKjobp8it-2L3ufuJ6my41/view)
 
   ## Questions?
   If you have any more questions for me, I can be reached from one of the links below. Thank you!
